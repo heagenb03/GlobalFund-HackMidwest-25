@@ -1,7 +1,3 @@
-/**
- * Custom hooks for donation flow
- */
-
 import { useState } from 'react';
 import { apiClient } from './api';
 

@@ -1,10 +1,5 @@
-/**
- * API client for Django backend
- */
-
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
-// Organization types
 export interface Organization {
   id: string;
   name: string;
@@ -54,7 +49,6 @@ export interface DonationStats {
   organizations_count: number;
 }
 
-// API Client
 class APIClient {
   private baseURL: string;
 
@@ -62,7 +56,6 @@ class APIClient {
     this.baseURL = API_BASE_URL;
   }
 
-  // Helper method for fetch requests
   private async request<T>(
     endpoint: string,
     options: RequestInit = {}
@@ -87,7 +80,6 @@ class APIClient {
     return response.json();
   }
 
-  // Organizations
   async getOrganizations(params?: {
     category?: string;
     featured?: boolean;
@@ -166,7 +158,6 @@ class APIClient {
     });
   }
 
-  // Validation
   async validateWallet(address: string): Promise<{ valid: boolean; formatted: string | null }> {
     return this.request('/validate/wallet/', {
       method: 'POST',
@@ -181,16 +172,13 @@ class APIClient {
     });
   }
 
-  // Stats
   async getStats(): Promise<DonationStats> {
     return this.request('/stats/');
   }
 
-  // Health Check
   async healthCheck(): Promise<{ status: string; database_connected: boolean; version: string }> {
     return this.request('/health/');
   }
 }
 
-// Export singleton instance
 export const apiClient = new APIClient();

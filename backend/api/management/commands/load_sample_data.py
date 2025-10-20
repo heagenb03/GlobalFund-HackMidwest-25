@@ -1,17 +1,14 @@
 from django.core.management.base import BaseCommand
 from organizations.models import Organization, OrganizationImpact, OrganizationUpdate
 
-
 class Command(BaseCommand):
     help = 'Load sample organizations into the database'
 
     def handle(self, *args, **kwargs):
         self.stdout.write('Loading sample organizations...')
         
-        # Clear existing data
         Organization.objects.all().delete()
         
-        # Create organizations
         orgs_data = [
             {
                 'name': 'Global Water Initiative',
@@ -92,7 +89,6 @@ class Command(BaseCommand):
             
             org = Organization.objects.create(**org_data)
             
-            # Add impacts
             for idx, impact_text in enumerate(impacts):
                 OrganizationImpact.objects.create(
                     organization=org,
@@ -100,7 +96,6 @@ class Command(BaseCommand):
                     order=idx
                 )
             
-            # Add updates
             for update_data in updates:
                 OrganizationUpdate.objects.create(
                     organization=org,

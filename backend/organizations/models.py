@@ -1,9 +1,7 @@
 from django.db import models
 from django.utils import timezone
-
-
+from donations.models import Donation
 class Organization(models.Model):
-    """Model for charitable organizations"""
     CATEGORIES = [
         ('water', 'Water & Sanitation'),
         ('education', 'Education'),
@@ -22,20 +20,16 @@ class Organization(models.Model):
     long_description = models.TextField(blank=True)
     wallet_address = models.CharField(max_length=42, unique=True)
     
-    # Fundraising goals
     goal_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     raised_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     
-    # Stats
     donor_count = models.IntegerField(default=0)
     
-    # Metadata
     image_emoji = models.CharField(max_length=10, default='🌍')
     verified = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     founded_year = models.IntegerField(null=True, blank=True)
     
-    # Timestamps
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -46,8 +40,6 @@ class Organization(models.Model):
         return self.name
     
     def update_stats(self):
-        """Update raised amount and donor count from donations"""
-        from donations.models import Donation
         donations = Donation.objects.filter(organization=self, status='completed')
         self.raised_amount = sum(d.amount for d in donations)
         self.donor_count = donations.values('donor_wallet').distinct().count()
@@ -55,7 +47,6 @@ class Organization(models.Model):
 
 
 class OrganizationImpact(models.Model):
-    """Impact metrics for an organization"""
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='impacts')
     metric = models.CharField(max_length=255)
     order = models.IntegerField(default=0)
@@ -68,7 +59,6 @@ class OrganizationImpact(models.Model):
 
 
 class OrganizationUpdate(models.Model):
-    """News updates from organizations"""
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='updates')
     title = models.CharField(max_length=255)
     content = models.TextField()

@@ -2,12 +2,10 @@ from rest_framework import serializers
 from organizations.models import Organization, OrganizationImpact, OrganizationUpdate
 from donations.models import Donation
 
-
 class OrganizationImpactSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrganizationImpact
         fields = ['id', 'metric', 'order']
-
 
 class OrganizationUpdateSerializer(serializers.ModelSerializer):
     date = serializers.SerializerMethodField()
@@ -36,7 +34,6 @@ class OrganizationUpdateSerializer(serializers.ModelSerializer):
         else:
             return obj.created_at.strftime('%B %d, %Y')
 
-
 class OrganizationListSerializer(serializers.ModelSerializer):
     """Serializer for organization list view"""
     image = serializers.CharField(source='image_emoji')
@@ -50,7 +47,6 @@ class OrganizationListSerializer(serializers.ModelSerializer):
             'id', 'name', 'category', 'location', 'description',
             'image', 'verified', 'featured', 'raised', 'goal', 'donors'
         ]
-
 
 class OrganizationDetailSerializer(serializers.ModelSerializer):
     """Serializer for organization detail view"""
@@ -71,7 +67,6 @@ class OrganizationDetailSerializer(serializers.ModelSerializer):
             'founded', 'impact', 'updates', 'wallet_address'
         ]
 
-
 class DonationSerializer(serializers.ModelSerializer):
     organization_name = serializers.CharField(source='organization.name', read_only=True)
     
@@ -83,7 +78,6 @@ class DonationSerializer(serializers.ModelSerializer):
             'status', 'message', 'created_at', 'completed_at'
         ]
         read_only_fields = ['id', 'created_at', 'completed_at', 'status']
-
 
 class DonationCreateSerializer(serializers.ModelSerializer):
     class Meta:
