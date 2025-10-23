@@ -16,3 +16,5 @@ Coinflow - Handle off ramp from SBC to fiat utilizing Venmo, ACH (US/CAN), & app
 
 ## Use/Demo
 [Demo](https://globalfund-9tgab833v-heagen-bells-projects.vercel.app/)
+
+NOTE - Backend deployed on Render using the free instance - backend may take up to a minute to load
