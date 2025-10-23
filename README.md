@@ -15,4 +15,4 @@ Moonflow - Handle on ramp from fiat to SBC utilizing debit/credit + apple/google
 Coinflow - Handle off ramp from SBC to fiat utilizing Venmo, ACH (US/CAN), & apple/google pay
 
 ## Use 
-Run the start script in main dir and download requirements.txt
+[https://globalfund-9tgab833v-heagen-bells-projects.vercel.app/](Demo)
