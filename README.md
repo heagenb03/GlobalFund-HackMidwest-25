@@ -1,10 +1,10 @@
 # Stable Coin Project - Global Fund
-Utilizing SBC stable coin by Brale, built a web application integrating international payments across the world for donating towards anything anyone.
+Utilizing the SBC, a stable coin by Brale, built a web application integrating international payments across the world for donating towards anything anyone.
 
 ## Tech Stack
-Next.js with React + Node.js
+Next.js
 
-Django with Python + SQLLite
+Django with Python + SQLite
 
 APIs/SDKS:
 
@@ -14,5 +14,5 @@ Moonflow - Handle on ramp from fiat to SBC utilizing debit/credit + apple/google
 
 Coinflow - Handle off ramp from SBC to fiat utilizing Venmo, ACH (US/CAN), & apple/google pay
 
-## Use 
-Run the start script in main dir
+## Use/Demo
+[Demo](https://globalfund-9tgab833v-heagen-bells-projects.vercel.app/)
